@@ -1,0 +1,8 @@
+---
+
+wildfly:
+  inst01_marvin-api:
+    port: 80
+
+  inst02_marvin-processor:
+    port: 81

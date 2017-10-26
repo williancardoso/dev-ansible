@@ -1,0 +1,7 @@
+---
+- name: apply common configuration to all nodes
+  hosts: 127.0.0.1
+  vars_files:
+    - variables.yml
+  roles:
+    - wildfly
