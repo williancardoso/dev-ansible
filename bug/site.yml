@@ -1,0 +1,20 @@
+---
+- name: apply common configuration to all nodes
+  hosts: 127.0.0.1
+  vars:
+    wildfly:
+      inst1:
+        modulo: api
+        url_modulo:
+          - https://jdbc.postgresql.org/download/postgresql-42.1.4.jar
+      inst2:
+        modulo: processor
+        url_modulo:
+          - https://jdbc.postgresql.org/download/postgresql-42.1.4.jar
+
+  tasks:
+
+    - name: Teste
+      include: files.yml instancia="{{ item.value.url_modulo }}" folder_module="/opt/{{ item.value.modulo }}/modules"
+      with_dict: "{{ wildfly }}"
+      when: item.value.url_modulo is defined
