@@ -1,18 +1,12 @@
 
 ---
 
-- debug:
-    var: instancia.value.url_modulo[0]
-
-- name: Download modules
+- name: Create folder {{ folder_module }}
   file:
     path: "{{ folder_module }}"
     state: directory
     mode: 0755
   register: folder_criado
-
-#- shell: "echo {{ instancia.value.url_modulo[0] }}"
-#  register: download
 
 - name: Download modules
   unarchive:
@@ -20,5 +14,3 @@
     dest: "{{ folder_criado.path }}"
     remote_src: yes
   with_items: "{{ instancia }}"
-
-  

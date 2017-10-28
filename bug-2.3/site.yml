@@ -1,6 +1,7 @@
 ---
 - name: apply common configuration to all nodes
   hosts: 127.0.0.1
+
   vars:
     wildfly:
       inst1:
@@ -15,6 +16,8 @@
   tasks:
 
     - name: Teste
-      include: files.yml instancia="{{ item.value.url_modulo }}" folder_module="/opt/{{ item.value.modulo }}/modules"
+      # bug-v2.3
+      # include: files.yml instancia="{{ item.value.url_modulo }}" folder_module="/opt/teste/{{ item.value.modulo }}/modules"
+      include_tasks: files.yml instancia="{{ item.value.url_modulo }}" folder_module="/opt/teste/{{ item.value.modulo }}/modules"
+      when: item.value.modulo is defined
       with_dict: "{{ wildfly }}"
-      when: item.value.url_modulo is defined
