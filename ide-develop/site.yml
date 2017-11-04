@@ -1,0 +1,15 @@
+---
+- name: apply common configuration to all nodes
+  hosts: 127.0.0.1
+  gather_facts: False
+  become: True
+  tasks:
+
+    - name: Install Packages
+      pip:
+        name: "{{ item }}"
+        state: present
+      with_list:
+        - ansible-lint
+        - ansible-vault
+        - pyapi-gitlab
