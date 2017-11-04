@@ -1,0 +1,26 @@
+---
+- name: apply common configuration to all nodes
+  hosts: 127.0.0.1
+  gather_facts: False
+  become: True
+  tasks:
+
+    - name: Install dependencies
+      pip:
+        name: pyapi-gitlab
+        state: present
+
+    - name: Create Gitlab Project in group wvcardoso
+      gitlab_project:
+        server_url: https://gitlab.com
+        validate_certs: True
+        login_user: xxxxxx
+        login_password: XXXXXX
+        name: ansible
+        group: wvcardoso
+        issues_enabled: False
+        wiki_enabled: True
+        snippets_enabled: True
+        import_url: https://gitlab.com/wvcardoso/blog.git
+        state: present
+      delegate_to: localhost
